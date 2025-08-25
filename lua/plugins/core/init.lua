@@ -1,5 +1,9 @@
 return {
   require("plugins.core.colorscheme"),
+  {
+    "saghen/blink.cmp",
+    url = "https://github.com/thomasbellio/blink.cmp",
+  },
   -- {
   --   "nvim-neo-tree/neo-tree.nvim",
   --   dependencies = {

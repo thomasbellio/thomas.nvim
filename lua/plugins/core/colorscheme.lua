@@ -1,6 +1,7 @@
 return {
   {
     "catppuccin/nvim",
+    url = "https://github.com/thomasbellio/catppuccin-nvim.git",
     name = "catppuccin",
     priority = 1000,
     opts = {

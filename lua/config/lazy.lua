@@ -1,7 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/thomasbellio/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=update-git-config", lazyrepo, lazypath })
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=v11.17.1", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
@@ -15,29 +15,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = {
-    {
-      "LazyVim/LazyVim",
-      import = "lazyvim.plugins",
-    },
-    { import = "plugins" },
+  {
+    "LazyVim/LazyVim",
+    url = "https://github.com/thomasbellio/LazyVim.git",
+    import = "lazyvim.plugins",
   },
-  git = {
-    url_format = "https://github.com/%s.git",
-    rewrite_path = function(plugin_path)
-      local override_map = {
-        ["catppuccin/nvim"] = "thomasbellio/catppuccin-nvim",
-        ["folke/lazy.nvim"] = "thomasbellio/lazy.nvim",
-        ["LazyVim/LazyVim"] = "thomasbellio/LazyVim",
-      }
-      if override_map[plugin_path] then
-        return override_map[plugin_path]
-      else
-        return plugin_path
-      end
-    end,
+  {
+    "folke/lazy.nvim",
+    url = "https://github.com/thomasbellio/lazy.nvim.git",
+    branch = "v11.17.1",
   },
-
+  { import = "plugins" },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
